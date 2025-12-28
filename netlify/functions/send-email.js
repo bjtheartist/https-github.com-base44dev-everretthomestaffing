@@ -17,7 +17,7 @@ exports.handler = async (event) => {
     // Send email
     const { data, error } = await resend.emails.send({
       from: 'Everrett Home Staffing <onboarding@resend.dev>',
-      to: 'iwacu27@gmail.com',
+      to: 'billyjoseph243@gmail.com',
       subject: `New Contact Request: ${subject}`,
       html: `
         <h2>New Contact Request Received</h2>
