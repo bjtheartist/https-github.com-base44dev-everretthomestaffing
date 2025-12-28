@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { cn } from '@/components/utils';
+import { cn } from './utils';
 
 export default function OptimizedImage({ src, alt, className, containerClassName, priority = false }) {
   const [isLoaded, setIsLoaded] = useState(priority); // If priority, assume loaded state logic handling immediately

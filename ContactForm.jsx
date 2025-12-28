@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { base44 } from '@/api/base44Client';
+import { db } from './instantdbClient';
+import { id as generateId } from '@instantdb/react';
 import { useMutation } from '@tanstack/react-query';
 import { CheckCircle2, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
+import { Button } from './button';
+import { Input } from './input';
+import { Textarea } from './textarea';
+import { Label } from './label';
 import { useLocation } from 'react-router-dom';
 
 export default function ContactForm() {
@@ -30,27 +31,27 @@ export default function ContactForm() {
 
   const submitMutation = useMutation({
     mutationFn: async (data) => {
-      // 1. Create the entity record
-      const entity = await base44.entities.ContactRequest.create(data);
-      
-      // 2. Send email notification
-      await base44.integrations.Core.SendEmail({
-        to: "iwacu27@gmail.com",
-        subject: `New Contact Request: ${data.subject}`,
-        body: `
-New contact request received!
+      // 1. Create InstantDB record
+      const contactId = generateId();
+      await db.transact([
+        db.tx.ContactRequests[contactId].update({
+          ...data,
+          createdAt: Date.now(),
+        })
+      ]);
 
-Name: ${data.name}
-Email: ${data.email}
-Phone: ${data.phone}
-Subject: ${data.subject}
-
-Message:
-${data.message}
-        `
+      // 2. Send email via Netlify function
+      const emailResponse = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
-      
-      return entity;
+
+      if (!emailResponse.ok) {
+        throw new Error('Failed to send email notification');
+      }
+
+      return { id: contactId };
     },
     onSuccess: () => {
       setIsSuccess(true);

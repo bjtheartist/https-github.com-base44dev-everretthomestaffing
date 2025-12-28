@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import Section from '@/components/ui/Section';
-import { FadeIn } from '@/components/ui/Animations';
-import { Button } from '@/components/ui/button';
+import Section from './Section';
+import { FadeIn } from './Animations';
+import { Button } from './button';
 import { CheckCircle2, Clock, Home, Heart, Pill, Car, Coffee, Sparkles, Brain, Phone, Calendar, UserCheck, ClipboardCheck } from 'lucide-react';
-import OptimizedImage from '@/components/ui/OptimizedImage';
-import Seo from '@/components/Seo';
+import OptimizedImage from './OptimizedImage';
+import Seo from './Seo';
 
 export default function Services() {
   const services = [
@@ -14,7 +14,7 @@ export default function Services() {
       id: 'personal-care',
       title: "Personal Care",
       icon: Heart,
-      image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/1d4f551fd_image.png",
+      image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/1d4f551fd_image.png",
       description: "Respectful assistance with daily living activities to maintain hygiene and dignity.",
       features: ["Bathing & Showering Assistance", "Dressing & Grooming", "Toileting & Incontinence Care", "Mobility Assistance", "Oral Hygiene"]
     },
@@ -22,7 +22,7 @@ export default function Services() {
       id: 'companionship',
       title: "Companionship",
       icon: Coffee,
-      image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/9c1c901f8_image.png",
+      image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/9c1c901f8_image.png",
       description: "Meaningful social interaction to combat loneliness and enhance emotional well-being.",
       features: ["Friendly Conversation", "Reading & Games", "Accompaniment on Walks", "Hobby Engagement", "Light Exercise"]
     },
@@ -30,7 +30,7 @@ export default function Services() {
       id: 'meal-prep',
       title: "Meal Preparation",
       icon: UtensilsIcon,
-      image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/2052f9b92_image.png",
+      image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/2052f9b92_image.png",
       description: "Nutritious, home-cooked meals tailored to specific dietary needs and preferences.",
       features: ["Menu Planning", "Grocery Shopping", "Cooking & Plating", "Dietary Monitoring", "Kitchen Cleanup"]
     },
@@ -38,7 +38,7 @@ export default function Services() {
       id: 'homemaking',
       title: "Light Housekeeping",
       icon: Home,
-      image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/f42a37b33_image.png",
+      image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/f42a37b33_image.png",
       description: "Keeping the home safe, clean, and organized to prevent falls and reduce stress.",
       features: ["Laundry & Linens", "Dusting & Vacuuming", "Pet Care Assistance", "Plant Care", "Organizing Clutter"]
     },
@@ -46,7 +46,7 @@ export default function Services() {
       id: 'medication',
       title: "Medication Reminders",
       icon: Pill,
-      image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/53495e6c1_image.png",
+      image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/53495e6c1_image.png",
       description: "Ensuring medications are taken on time and prescriptions are refilled.",
       features: ["Timely Reminders", "Prescription Pickup", "Monitoring Side Effects", "Hydration Reminders", "Family Updates"]
     },
@@ -62,7 +62,7 @@ export default function Services() {
       id: 'dementia',
       title: "Dementia Care",
       icon: Brain,
-      image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/e805ce009_image.png",
+      image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/e805ce009_image.png",
       description: "Specialized support for those living with Alzheimer's and other forms of dementia.",
       features: ["Memory Exercises", "Wandering Prevention", "Calming Techniques", "Routine Maintenance", "Respite for Family"]
     },
@@ -70,7 +70,7 @@ export default function Services() {
       id: 'respite',
       title: "Respite Care",
       icon: Sparkles,
-      image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/d03bea649_image.png",
+      image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/d03bea649_image.png",
       description: "Temporary relief for family caregivers to rest, recharge, and attend to their own needs.",
       features: ["Flexible Hours", "Overnight Care", "Weekend Support", "Vacation Coverage", "Emergency Backup"]
     }

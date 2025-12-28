@@ -1,11 +1,11 @@
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
-import Section from '@/components/ui/Section';
-import { FadeIn } from '@/components/ui/Animations';
-import { Card, CardContent } from '@/components/ui/card';
-import OptimizedImage from '@/components/ui/OptimizedImage';
-import Seo from '@/components/Seo';
-import ContactForm from '@/components/ContactForm';
+import Section from './Section';
+import { FadeIn } from './Animations';
+import { Card, CardContent } from './card';
+import OptimizedImage from './OptimizedImage';
+import Seo from './Seo';
+import ContactForm from './ContactForm';
 
 export default function Contact() {
   return (

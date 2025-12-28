@@ -1,10 +1,10 @@
 import React from 'react';
-import Section from '@/components/ui/Section';
-import { FadeIn, StaggerContainer, StaggerItem } from '@/components/ui/Animations';
+import Section from './Section';
+import { FadeIn, StaggerContainer, StaggerItem } from './Animations';
 import { FileText, BookOpen, Heart, ExternalLink, Phone } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import OptimizedImage from '@/components/ui/OptimizedImage';
-import Seo from '@/components/Seo';
+import { Button } from './button';
+import OptimizedImage from './OptimizedImage';
+import Seo from './Seo';
 
 export default function Resources() {
   const resources = [

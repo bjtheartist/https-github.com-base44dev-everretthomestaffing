@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { cn } from '@/components/utils';
+import { cn } from './utils';
 import { motion } from 'framer-motion';
 
 export const FadeIn = ({ children, delay = 0, className }) => (

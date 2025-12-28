@@ -1,6 +1,6 @@
 import './App.css'
-import Pages from "@/pages/index.jsx"
-import { Toaster } from "@/components/ui/toaster"
+import Pages from "./index.jsx"
+import { Toaster } from "./toaster"
 
 function App() {
   return (

@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Users, Clock, Home as HomeIcon, Heart, Star, UserCheck, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
-import OptimizedImage from '@/components/ui/OptimizedImage';
-import Seo from '@/components/Seo';
-import { Button } from '@/components/ui/button';
-import Section from '@/components/ui/Section';
-import { FadeIn, ScaleIn, StaggerContainer, StaggerItem } from '@/components/ui/Animations';
-import ContactForm from '@/components/ContactForm';
+import OptimizedImage from './OptimizedImage';
+import Seo from './Seo';
+import { Button } from './button';
+import Section from './Section';
+import { FadeIn, ScaleIn, StaggerContainer, StaggerItem } from './Animations';
+import ContactForm from './ContactForm';
 
 const heroImages = [
-  "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/4853e8c4c_image.png",
-  "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/4e27aeb92_image.png",
-  "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/4a3475697_image.png"
+  "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/4853e8c4c_image.png",
+  "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/4e27aeb92_image.png",
+  "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/4a3475697_image.png"
 ];
 
 export default function HomePage() {
@@ -128,8 +128,8 @@ export default function HomePage() {
 
             <ScaleIn className="relative">
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-700">
-                <OptimizedImage 
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/996c2aba0_image.png" 
+                <OptimizedImage
+                  src="https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/996c2aba0_image.png"
                   alt="Caregiver with elderly woman" 
                   className="w-full h-[400px] md:h-[600px] object-cover"
                   containerClassName="w-full"
@@ -161,25 +161,25 @@ export default function HomePage() {
                 title: "Companionship",
                 icon: Heart,
                 desc: "Friendly conversation, emotional support, and engagement in hobbies.",
-                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/830ef18e9_image.png"
+                image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/830ef18e9_image.png"
               },
               {
                 title: "Respite Care",
                 icon: Clock,
                 desc: "Temporary relief for family caregivers, available for a few hours or days.",
-                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/531b13f99_image.png"
+                image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/531b13f99_image.png"
               },
               {
                 title: "Live-in Care",
                 icon: HomeIcon,
                 desc: "Around-the-clock support for peace of mind and constant safety.",
-                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/4a3475697_image.png"
+                image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/4a3475697_image.png"
               },
               {
                 title: "Personal Care",
                 icon: UserCheck,
                 desc: "Assistance with bathing, dressing, grooming, and hygiene needs.",
-                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/996c2aba0_image.png"
+                image: "https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/996c2aba0_image.png"
               }
             ].map((service, idx) => (
               <StaggerItem key={idx} className="group relative rounded-[2rem] overflow-hidden h-96 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer">
@@ -219,8 +219,8 @@ export default function HomePage() {
       <Section className="py-0 bg-[#2C3E50] overflow-hidden">
         <div className="grid md:grid-cols-2 gap-0 min-h-[500px] md:min-h-[600px]">
             <div className="relative h-full min-h-[400px] md:min-h-full order-2 md:order-1">
-                <OptimizedImage 
-                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/692c778e052cbaedc9609d3e/1d4f551fd_image.png" 
+                <OptimizedImage
+                    src="https://aqyefuonagwwxjxfllcz.supabase.co/storage/v1/object/public/everett%20home%20staffing2/1d4f551fd_image.png"
                     alt="Join our team" 
                     className="w-full h-full object-cover"
                     containerClassName="absolute inset-0"

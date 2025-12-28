@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from './utils';
 import { Heart, Phone, MapPin, Facebook, Instagram, Linkedin, Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from './button';
 
 export default function Layout({ children, currentPageName }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/components/utils';
+import { cn } from './utils';
 
 const Section = ({ className, children, background = 'white' }) => {
   const bgClasses = {

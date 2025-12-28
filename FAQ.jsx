@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import Section from '@/components/ui/Section';
-import { FadeIn } from '@/components/ui/Animations';
-import { Button } from '@/components/ui/button';
+import Section from './Section';
+import { FadeIn } from './Animations';
+import { Button } from './button';
 import { Phone, MessageCircle, HelpCircle, ShieldCheck, Users, Clock } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import OptimizedImage from '@/components/ui/OptimizedImage';
-import Seo from '@/components/Seo';
+} from "./accordion";
+import OptimizedImage from './OptimizedImage';
+import Seo from './Seo';
 
 export default function FAQ() {
   const faqs = [
