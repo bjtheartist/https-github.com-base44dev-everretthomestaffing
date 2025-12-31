@@ -1,18 +1,23 @@
 import React from 'react';
 import { cn } from './utils';
 
-const Section = ({ className, children, background = 'white' }) => {
+const Section = ({ className, children, background = 'cream' }) => {
   const bgClasses = {
+    // Elite Design System Backgrounds
+    cream: 'bg-elite-cream',
+    beige: 'bg-elite-beige',
+    sand: 'bg-elite-sand',
+    navy: 'bg-elite-navy text-elite-cream',
+    sage: 'bg-elite-sage',
     white: 'bg-white',
-    soft: 'bg-[#FAF9F6]',
-    peach: 'bg-[#FFF5F3]',
-    teal: 'bg-[#F0F7F7]',
-    primary: 'bg-[#4E8D8C]',
-    navy: 'bg-[#2C3E50]',
+    // Legacy
+    bone: 'bg-elite-cream',
+    primary: 'bg-elite-navy text-elite-cream',
+    transparent: '',
   };
 
   return (
-    <section className={cn(`py-16 md:py-24 relative overflow-hidden ${bgClasses[background]}`, className)}>
+    <section className={cn(`py-24 md:py-32 relative overflow-hidden ${bgClasses[background]}`, className)}>
       {children}
     </section>
   );

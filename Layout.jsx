@@ -2,16 +2,25 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from './utils';
-import { Heart, Phone, MapPin, Facebook, Instagram, Linkedin, Menu, X } from 'lucide-react';
+import { Phone, MapPin, List, X, ArrowUpRight } from '@phosphor-icons/react';
 import { Button } from './button';
 
 export default function Layout({ children, currentPageName }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
   const { pathname } = useLocation();
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { name: 'Home', path: 'Home' },
@@ -22,150 +31,170 @@ export default function Layout({ children, currentPageName }) {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-texture-waves font-sans text-[#2C3E50]">
-      
-      {/* Top Bar - Trust & Contact */}
-      <div className="bg-[#2C3E50] text-white py-2 px-4 text-sm">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0">
-          <div className="flex items-center gap-4 opacity-90">
-            <span className="flex items-center gap-2">
-              <MapPin className="w-3 h-3 text-[#4E8D8C]" />
-              Serving the Greater Lansing Community
-            </span>
-          </div>
-          <div className="flex items-center gap-6">
-            <a href="tel:+15174021891" className="flex items-center gap-2 hover:text-[#4E8D8C] transition-colors">
-              <Phone className="w-3 h-3" />
-              <span className="font-medium tracking-wide">(517) 402-1891</span>
-            </a>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen flex flex-col bg-elite-cream font-sans text-elite-navy">
 
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#4E8D8C]/10 shadow-sm transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex justify-between items-center">
-          
-          {/* Logo */}
+      {/* Elite Header - Area 17 Style */}
+      <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        isScrolled
+          ? 'bg-elite-cream/95 backdrop-blur-lg border-b border-black/5 shadow-sm'
+          : 'bg-transparent'
+      }`}>
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 h-20 md:h-24 flex justify-between items-center">
+
+          {/* Logo - Display Font */}
           <Link to={createPageUrl('Home')} className="flex items-center gap-2 group">
-            <div className="flex flex-col">
-              <span className="font-serif text-2xl font-bold leading-none tracking-tight text-[#2C3E50]">EVERETT</span>
-              <span className="text-xs uppercase tracking-[0.3em] text-[#4E8D8C] font-medium">Home Agency</span>
-            </div>
+            <span className="font-display text-2xl md:text-3xl font-normal tracking-tight text-elite-navy">
+              Everett
+            </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop Nav - Minimalist */}
+          <nav className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
+              <Link
+                key={link.name}
                 to={createPageUrl(link.path)}
-                className={`text-sm font-medium tracking-wide hover:text-[#2C3E50] transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#2C3E50] after:transition-all after:duration-300 hover:after:w-full ${currentPageName === link.path ? 'text-[#2C3E50] font-bold after:w-full' : 'text-[#2C3E50]'}`}
+                className={`text-[13px] font-medium uppercase tracking-[0.1em] link-underline transition-colors duration-300 ${
+                  currentPageName === link.path
+                    ? 'text-elite-navy'
+                    : 'text-elite-charcoal hover:text-elite-navy'
+                }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Link to={createPageUrl('Contact')}>
-              <Button className="bg-[#2C3E50] hover:bg-[#1a252f] text-white rounded-full px-6 shadow-lg shadow-[#2C3E50]/20 transition-all duration-300 transform hover:-translate-y-0.5">
-                Free Consultation
-              </Button>
-            </Link>
           </nav>
 
+          {/* CTA Button - Sharp Elegant */}
+          <div className="hidden md:block">
+            <Link to={createPageUrl('Contact')}>
+              <button className="group flex items-center gap-2 bg-elite-navy text-elite-cream px-6 py-3 text-[13px] font-medium uppercase tracking-[0.08em] rounded-[2px] hover:bg-elite-charcoal transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-elite-navy/15">
+                Schedule Consultation
+                <ArrowUpRight size={16} weight="bold" className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </button>
+            </Link>
+          </div>
+
           {/* Mobile Menu Toggle */}
-          <button 
-            className="md:hidden p-2 text-[#2C3E50]"
+          <button
+            className="md:hidden p-2 text-elite-navy"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X /> : <Menu />}
+            {isMobileMenuOpen ? <X size={24} weight="light" /> : <List size={24} weight="light" />}
           </button>
         </div>
 
-        {/* Mobile Nav Dropdown */}
+        {/* Mobile Nav - Full Screen Overlay */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 shadow-lg py-4 px-4 flex flex-col gap-4 animate-in slide-in-from-top-5">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={createPageUrl(link.path)}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg font-medium text-[#2C3E50] py-2 border-b border-gray-50"
-              >
-                {link.name}
+          <div className="md:hidden fixed inset-0 top-20 bg-elite-cream z-40 flex flex-col px-6 py-12">
+            <nav className="flex flex-col gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={createPageUrl(link.path)}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-2xl font-display text-elite-navy py-3 border-b border-elite-sage/30"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+            <div className="mt-10">
+              <Link to={createPageUrl('Contact')} onClick={() => setIsMobileMenuOpen(false)}>
+                <button className="w-full bg-elite-navy text-elite-cream py-4 text-[13px] font-medium uppercase tracking-[0.08em] rounded-[2px]">
+                  Schedule Consultation
+                </button>
               </Link>
-            ))}
-            <Link to={createPageUrl('Contact')} onClick={() => setIsMobileMenuOpen(false)}>
-              <Button className="w-full bg-[#2C3E50] text-white rounded-full mt-2">
-                Free Consultation
-              </Button>
-            </Link>
+            </div>
+            <div className="mt-auto pt-10 border-t border-elite-sage/30">
+              <a href="tel:+15174021891" className="flex items-center gap-3 text-elite-charcoal">
+                <Phone size={20} weight="thin" className="text-elite-green" />
+                <span className="text-lg">(517) 402-1891</span>
+              </a>
+            </div>
           </div>
         )}
       </header>
 
-      {/* Main Content */}
+      {/* Main Content - No spacer, hero extends behind transparent header */}
       <main className="flex-grow">
         {children}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#2C3E50] text-white pt-16 pb-8">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          
-          {/* Brand Col */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <Heart className="w-5 h-5 text-[#4E8D8C]" fill="currentColor" />
-              <span className="font-serif text-lg font-bold">EVERETT</span>
+      {/* Footer - Elite Design */}
+      <footer className="bg-elite-navy text-elite-cream pt-24 pb-12">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+
+          {/* Top Section - Large Brand Statement */}
+          <div className="mb-20">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-[1.1] max-w-3xl">
+              Compassionate care,<br />
+              <span className="italic text-elite-sage">delivered with dignity.</span>
+            </h2>
+          </div>
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+
+            {/* Brand Col */}
+            <div className="space-y-6 md:col-span-1">
+              <span className="font-display text-2xl">Everett</span>
+              <p className="text-elite-sage/80 text-sm leading-relaxed max-w-xs">
+                Premium senior care services in the Greater Lansing area. We honor independence and prioritize well-being.
+              </p>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed max-w-xs">
-              Compassionate, non-medical home care tailored to your family's needs. Helping seniors live with dignity in the comfort of their own homes.
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-[11px] font-medium uppercase tracking-[0.15em] text-elite-taupe mb-8">Navigation</h4>
+              <ul className="space-y-4 text-sm">
+                <li><Link to={createPageUrl('Home')} className="text-elite-sage/80 hover:text-elite-cream transition-colors">Home</Link></li>
+                <li><Link to={createPageUrl('Services')} className="text-elite-sage/80 hover:text-elite-cream transition-colors">Services</Link></li>
+                <li><Link to={createPageUrl('FAQ')} className="text-elite-sage/80 hover:text-elite-cream transition-colors">FAQ</Link></li>
+                <li><Link to={createPageUrl('Resources')} className="text-elite-sage/80 hover:text-elite-cream transition-colors">Resources</Link></li>
+                <li><Link to={createPageUrl('Contact')} className="text-elite-sage/80 hover:text-elite-cream transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="text-[11px] font-medium uppercase tracking-[0.15em] text-elite-taupe mb-8">Services</h4>
+              <ul className="space-y-4 text-sm text-elite-sage/80">
+                <li>Personal Care</li>
+                <li>Companionship</li>
+                <li>Respite Care</li>
+                <li>Live-in Care</li>
+                <li>Meal Preparation</li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-[11px] font-medium uppercase tracking-[0.15em] text-elite-taupe mb-8">Contact</h4>
+              <ul className="space-y-4 text-sm">
+                <li>
+                  <a href="tel:+15174021891" className="text-elite-sage/80 hover:text-elite-cream transition-colors flex items-center gap-2">
+                    <Phone size={16} weight="thin" />
+                    (517) 402-1891
+                  </a>
+                </li>
+                <li className="flex items-start gap-2 text-elite-sage/80">
+                  <MapPin size={16} weight="thin" className="mt-0.5 shrink-0" />
+                  <span>Greater Lansing Area<br />Michigan</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-[12px] text-elite-sage/60 tracking-wide">
+              &copy; {new Date().getFullYear()} Everett Home Agency. All rights reserved.
             </p>
-
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-serif text-lg mb-6 text-[#4E8D8C]">Quick Links</h4>
-            <ul className="space-y-3 text-gray-300 text-sm">
-              <li><Link to={createPageUrl('Home')} className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link to={createPageUrl('Services')} className="hover:text-white transition-colors">Care Services</Link></li>
-              <li><Link to={createPageUrl('FAQ')} className="hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link to={createPageUrl('Resources')} className="hover:text-white transition-colors">Resources</Link></li>
-              <li><Link to={createPageUrl('Contact')} className="hover:text-white transition-colors">Careers</Link></li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="font-serif text-lg mb-6 text-[#4E8D8C]">Services</h4>
-            <ul className="space-y-3 text-gray-300 text-sm">
-              <li>Personal Care & Hygiene</li>
-              <li>Companionship</li>
-              <li>Meal Preparation</li>
-              <li>Medication Reminders</li>
-              <li>Light Housekeeping</li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="font-serif text-lg mb-6 text-[#4E8D8C]">Contact Us</h4>
-            <ul className="space-y-4 text-gray-300 text-sm">
-
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-[#4E8D8C] shrink-0" />
-                <a href="tel:+15174021891" className="hover:text-white transition-colors">(517) 402-1891</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 md:px-8 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Everett Home Agency. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <div className="flex gap-8 text-[12px] text-elite-sage/60">
+              <a href="#" className="hover:text-elite-cream transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-elite-cream transition-colors">Terms of Service</a>
+            </div>
           </div>
         </div>
       </footer>

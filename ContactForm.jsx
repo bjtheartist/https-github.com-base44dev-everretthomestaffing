@@ -3,17 +3,13 @@ import { useForm } from 'react-hook-form';
 import { db } from './instantdbClient';
 import { id as generateId } from '@instantdb/react';
 import { useMutation } from '@tanstack/react-query';
-import { CheckCircle2, Loader2 } from 'lucide-react';
-import { Button } from './button';
-import { Input } from './input';
-import { Textarea } from './textarea';
-import { Label } from './label';
+import { CheckCircle, Spinner, ArrowUpRight } from '@phosphor-icons/react';
 import { useLocation } from 'react-router-dom';
 
 export default function ContactForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const location = useLocation();
-  
+
   const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
     defaultValues: {
       subject: 'Service Inquiry'
@@ -63,99 +59,143 @@ export default function ContactForm() {
     submitMutation.mutate({ ...data, status: 'new' });
   };
 
+  // Premium input styling
+  const inputBaseClass = `
+    w-full
+    bg-elite-beige/50
+    border-0
+    border-b
+    border-elite-sage/40
+    rounded-none
+    px-0
+    py-4
+    text-elite-navy
+    text-base
+    font-sans
+    placeholder:text-elite-taupe/60
+    focus:outline-none
+    focus:border-elite-navy
+    focus:bg-transparent
+    transition-all
+    duration-300
+  `;
+
+  const labelClass = `
+    block
+    font-heading
+    text-sm
+    text-elite-charcoal
+    mb-2
+    tracking-wide
+  `;
+
   return (
-    <div className="bg-white p-8 md:p-10 rounded-[2rem] shadow-soft border border-gray-100">
+    <div>
       {isSuccess ? (
         <div className="text-center py-12">
-          <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 className="w-10 h-10" />
+          <div className="w-20 h-20 bg-elite-sage/30 text-elite-green rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle size={40} weight="thin" />
           </div>
-          <h3 className="text-2xl font-serif font-bold text-[#2C3E50] mb-4">Message Sent!</h3>
-          <p className="text-gray-600 mb-8">Thank you for reaching out. We will be in touch shortly.</p>
-          <Button onClick={() => setIsSuccess(false)} variant="outline" className="rounded-full">Send Another Message</Button>
+          <h3 className="text-2xl font-display font-light text-elite-navy mb-4">Message Sent</h3>
+          <p className="text-elite-charcoal mb-8">Thank you for reaching out. We will be in touch shortly.</p>
+          <button
+            onClick={() => setIsSuccess(false)}
+            className="text-elite-navy text-[13px] font-medium uppercase tracking-[0.08em] border-b border-elite-navy pb-1 hover:text-elite-charcoal hover:border-elite-charcoal transition-colors"
+          >
+            Send Another Message
+          </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div>
-            <h3 className="text-2xl font-serif font-bold text-[#2C3E50] mb-2">Send a Message</h3>
-            <p className="text-gray-500 mb-6">Tell us a little about your situation or inquiry.</p>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          {/* Form Header */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-display font-light text-elite-navy mb-3">Send a Message</h3>
+            <p className="text-elite-charcoal text-[15px]">Tell us a little about your situation or inquiry.</p>
           </div>
 
-          <div className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Your Name</Label>
-                <Input 
-                  id="name" 
-                  {...register("name", { required: "Name is required" })}
-                  className="rounded-xl bg-gray-50 border-gray-200 h-12 focus:ring-[#4E8D8C] focus:border-[#4E8D8C]"
-                  placeholder="Jane Doe"
-                />
-                {errors.name && <span className="text-sm text-red-500">{errors.name.message}</span>}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
-                <Input 
-                  id="phone" 
-                  {...register("phone")}
-                  className="rounded-xl bg-gray-50 border-gray-200 h-12 focus:ring-[#4E8D8C] focus:border-[#4E8D8C]"
-                  placeholder="(555) 123-4567"
-                />
-              </div>
+          {/* Name & Phone Row */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <label htmlFor="name" className={labelClass}>Your Name</label>
+              <input
+                id="name"
+                {...register("name", { required: "Name is required" })}
+                className={inputBaseClass}
+                placeholder="Jane Doe"
+              />
+              {errors.name && <span className="text-sm text-elite-rose mt-2 block">{errors.name.message}</span>}
             </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email Address</Label>
-                <Input 
-                  id="email" 
-                  type="email"
-                  {...register("email", { required: "Email is required" })}
-                  className="rounded-xl bg-gray-50 border-gray-200 h-12 focus:ring-[#4E8D8C] focus:border-[#4E8D8C]"
-                  placeholder="jane@example.com"
-                />
-                {errors.email && <span className="text-sm text-red-500">{errors.email.message}</span>}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
-                <select
-                  id="subject"
-                  {...register("subject", { required: "Subject is required" })}
-                  className="w-full rounded-xl bg-gray-50 border-gray-200 h-12 px-3 text-sm focus:ring-[#4E8D8C] focus:border-[#4E8D8C] outline-none ring-offset-2 focus:ring-2 transition-all"
-                >
-                  <option value="Service Inquiry">Service Inquiry (Looking for Care)</option>
-                  <option value="Job Application">Job Application (I want to work)</option>
-                  <option value="General Question">General Question</option>
-                  <option value="Partnership">Partnership Opportunity</option>
-                </select>
-                {errors.subject && <span className="text-sm text-red-500">{errors.subject.message}</span>}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
-              <Textarea 
-                id="message" 
-                {...register("message")}
-                className="rounded-xl bg-gray-50 border-gray-200 min-h-[150px] focus:ring-[#4E8D8C] focus:border-[#4E8D8C]"
-                placeholder="How can we help you?"
+            <div>
+              <label htmlFor="phone" className={labelClass}>Phone Number</label>
+              <input
+                id="phone"
+                {...register("phone")}
+                className={inputBaseClass}
+                placeholder="(555) 123-4567"
               />
             </div>
           </div>
 
-          <Button 
-            type="submit" 
-            disabled={submitMutation.isPending}
-            className="w-full h-14 bg-[#4E8D8C] hover:bg-[#3A6D6C] text-white rounded-full text-lg font-bold shadow-lg shadow-[#4E8D8C]/20"
-          >
-            {submitMutation.isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...
-              </>
-            ) : (
-              "Submit Request"
-            )}
-          </Button>
+          {/* Email & Subject Row */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <label htmlFor="email" className={labelClass}>Email Address</label>
+              <input
+                id="email"
+                type="email"
+                {...register("email", { required: "Email is required" })}
+                className={inputBaseClass}
+                placeholder="jane@example.com"
+              />
+              {errors.email && <span className="text-sm text-elite-rose mt-2 block">{errors.email.message}</span>}
+            </div>
+            <div>
+              <label htmlFor="subject" className={labelClass}>Subject</label>
+              <select
+                id="subject"
+                {...register("subject", { required: "Subject is required" })}
+                className={`${inputBaseClass} cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%239e8a78%22%20d%3D%22M6%208L1%203h10z%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_0_center]`}
+              >
+                <option value="Service Inquiry">Service Inquiry (Looking for Care)</option>
+                <option value="Job Application">Job Application (I want to work)</option>
+                <option value="General Question">General Question</option>
+                <option value="Partnership">Partnership Opportunity</option>
+              </select>
+              {errors.subject && <span className="text-sm text-elite-rose mt-2 block">{errors.subject.message}</span>}
+            </div>
+          </div>
+
+          {/* Message */}
+          <div>
+            <label htmlFor="message" className={labelClass}>Message</label>
+            <textarea
+              id="message"
+              {...register("message")}
+              className={`${inputBaseClass} min-h-[140px] resize-none`}
+              placeholder="How can we help you?"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div className="pt-4">
+            <button
+              type="submit"
+              disabled={submitMutation.isPending}
+              className="group w-full flex items-center justify-center gap-2 bg-elite-navy text-elite-cream px-8 py-5 text-[13px] font-medium uppercase tracking-[0.08em] rounded-[2px] hover:bg-elite-charcoal transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-elite-navy/15"
+            >
+              {submitMutation.isPending ? (
+                <>
+                  <Spinner size={18} className="animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Submit Request
+                  <ArrowUpRight size={16} weight="bold" className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </>
+              )}
+            </button>
+          </div>
         </form>
       )}
     </div>
