@@ -1,8 +1,13 @@
 import React from 'react';
-import Section from '../Section';
-import { FadeIn, StaggerContainer, StaggerItem } from '../Animations';
-import { FileText, BookOpen, Heart, ExternalLink, Phone } from 'lucide-react';
-import { Button } from '../button';
+import { FadeIn, ScaleIn, StaggerContainer, StaggerItem } from '../Animations';
+import {
+  FileText,
+  BookOpen,
+  Heart,
+  ArrowSquareOut,
+  Phone,
+  ArrowUpRight
+} from '@phosphor-icons/react';
 import OptimizedImage from '../OptimizedImage';
 import Seo from '../Seo';
 
@@ -39,53 +44,96 @@ export default function Resources() {
 
   return (
     <div className="flex flex-col">
-      <Seo 
-        title="Resources" 
-        description="Helpful resources for caregivers and families, including guides on home care options, health & wellness, and financial planning." 
+      <Seo
+        title="Resources"
+        description="Helpful resources for caregivers and families, including guides on home care options, health & wellness, and financial planning."
       />
-      <section className="pt-32 pb-32 md:pt-48 md:pb-48 text-center relative overflow-hidden rounded-2xl">
-        <OptimizedImage
-            src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=2000"
-            alt="Peaceful reading"
-            className="w-full h-full object-cover"
-            containerClassName="absolute inset-0 z-0"
-            priority={true}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2C3E50]/80 via-[#2C3E50]/60 to-[#2C3E50]/80 z-0"></div>
-        <FadeIn className="relative z-10 px-4">
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg max-w-3xl mx-auto">
-            <div className="inline-block px-4 py-1 rounded-lg bg-everett-accent text-everett-text font-mono font-bold tracking-widest text-xs uppercase mb-4">
-              Resources
-            </div>
-            <h1 className="text-4xl md:text-5xl font-sans font-bold text-everett-text mb-4">Caregiver Resources</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto font-serif italic">
-              Helpful guides, articles, and tools for families navigating the care journey.
-            </p>
+
+      {/* HERO SECTION */}
+      <section className="relative min-h-[60vh] flex items-center bg-elite-cream pt-20 md:pt-24">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-12 md:py-20 grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left - Content */}
+          <div className="order-2 lg:order-1">
+            <FadeIn>
+              <span className="text-eyebrow block mb-6">
+                Resources
+              </span>
+
+              <h1 className="text-display font-display font-light text-elite-navy leading-[0.95] tracking-tight mb-8">
+                Caregiver<br />
+                <span className="italic text-elite-taupe">Resources</span>
+              </h1>
+
+              <p className="text-body-lg text-elite-charcoal max-w-lg mb-10 leading-relaxed">
+                Helpful guides, articles, and tools for families navigating the care journey.
+              </p>
+            </FadeIn>
           </div>
-        </FadeIn>
+
+          {/* Right - Image */}
+          <div className="order-1 lg:order-2">
+            <ScaleIn>
+              <div className="relative">
+                <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-2xl">
+                  <OptimizedImage
+                    src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=2000"
+                    alt="Peaceful reading"
+                    className="w-full h-full object-cover"
+                    containerClassName="w-full h-full"
+                    priority={true}
+                  />
+                </div>
+                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-elite-sage/50 rounded-lg -z-10" />
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-elite-gold/30 rounded-lg -z-10" />
+              </div>
+            </ScaleIn>
+          </div>
+        </div>
       </section>
 
-      <section className="py-16 md:py-24 mt-6">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+      {/* RESOURCES GRID */}
+      <section className="py-16 md:py-24 bg-elite-sand section-textured">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+          <FadeIn className="mb-16 md:mb-20 max-w-2xl">
+            <span className="text-eyebrow block mb-6">
+              Helpful Information
+            </span>
+            <h2 className="text-h2 font-display font-light text-elite-navy leading-[1.1] mb-4">
+              Guides &<br />
+              <span className="italic">articles.</span>
+            </h2>
+            <div className="divider-accent" />
+          </FadeIn>
+
           <StaggerContainer className="grid md:grid-cols-3 gap-6">
             {resources.map((section, idx) => (
-              <StaggerItem key={idx} className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div className="w-12 h-12 bg-everett-accent rounded-lg flex items-center justify-center text-everett-text mb-6">
-                  <section.icon className="w-6 h-6" />
+              <StaggerItem key={idx} className="card-bordered hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
+                <div className="icon-contained">
+                  <section.icon size={32} weight="thin" />
                 </div>
-                <div className="font-mono text-xs text-gray-400 uppercase tracking-wider mb-2">
-                  {String(idx + 1).padStart(2, '0')} // {section.category}
-                </div>
-                <h3 className="text-2xl font-sans font-bold text-everett-text mb-6">{section.category}</h3>
+
+                <h3 className="text-xl font-heading font-medium text-elite-navy mb-2">
+                  {section.category}
+                </h3>
+
+                <div className="w-8 h-[1px] bg-elite-gold/40 mb-6" />
+
                 <ul className="space-y-6">
                   {section.items.map((item, i) => (
                     <li key={i} className="group">
-                      <a href={item.link} className="block">
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
                         <div className="flex items-start justify-between mb-1">
-                          <span className="font-sans font-bold text-everett-text group-hover:text-gray-600 transition-colors">{item.title}</span>
-                          <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-everett-text transition-colors" />
+                          <span className="font-heading font-medium text-elite-navy group-hover:text-elite-charcoal transition-colors">
+                            {item.title}
+                          </span>
+                          <ArrowSquareOut size={16} weight="thin" className="text-elite-taupe group-hover:text-elite-navy transition-colors mt-1" />
                         </div>
-                        <p className="text-sm text-gray-500 font-serif italic">{item.desc}</p>
+                        <p className="text-sm text-elite-taupe leading-relaxed">{item.desc}</p>
                       </a>
                     </li>
                   ))}
@@ -96,24 +144,30 @@ export default function Resources() {
         </div>
       </section>
 
-      <section className="bg-[#2C3E50] text-white text-center py-16 rounded-2xl mt-6">
-        <FadeIn>
-          <div className="max-w-2xl mx-auto px-4">
-            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg">
-              <div className="inline-block px-4 py-1 rounded-lg bg-everett-accent text-everett-text font-mono font-bold tracking-widest text-xs uppercase mb-4">
-                Get Help
-              </div>
-              <h2 className="text-3xl font-sans font-bold mb-4 text-everett-text">Need personalized advice?</h2>
-              <p className="text-lg text-gray-600 mb-8 font-serif italic">
-                Every situation is unique. Speak with one of our care coordinators for guidance specific to your family's needs.
-              </p>
-              <Button className="bg-everett-text text-white hover:bg-[#0d1a12] rounded-lg px-8 py-6 text-lg font-bold shadow-sm hover:-translate-y-1 transition-all">
-                <Phone className="w-5 h-5 mr-2" />
-                Call (517) 402-1891
-              </Button>
+      {/* CTA SECTION */}
+      <section className="py-20 md:py-28 bg-elite-navy text-elite-cream">
+        <div className="max-w-[900px] mx-auto px-6 md:px-12 text-center">
+          <FadeIn>
+            <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-elite-gold mb-8 block">
+              Get Help
+            </span>
+
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-light leading-[1.4] text-elite-cream/95 mb-8">
+              Every situation is unique. Speak with one of our care coordinators for guidance specific to your family's needs.
+            </h2>
+
+            <div className="mt-10 flex justify-center">
+              <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-elite-gold/50 to-transparent mb-10" />
             </div>
-          </div>
-        </FadeIn>
+
+            <a href="tel:+15174021891">
+              <button className="group flex items-center justify-center gap-2 mx-auto bg-elite-gold text-elite-navy px-10 py-4 text-[13px] font-semibold uppercase tracking-[0.08em] rounded-[2px] hover:bg-elite-gold/80 transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-elite-gold/20">
+                <Phone size={18} weight="bold" />
+                Call (517) 402-1891
+              </button>
+            </a>
+          </FadeIn>
+        </div>
       </section>
     </div>
   );
