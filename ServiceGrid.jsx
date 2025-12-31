@@ -35,16 +35,16 @@ const services = [
 ];
 
 export default function ServiceGrid() {
-    <section className="bg-concierge-bone w-full max-w-7xl mx-auto py-20 px-4 md:px-8">
-        <div className="border-t border-concierge-stone mb-12"></div>
+    <section className="w-full max-w-7xl mx-auto py-20 px-4 md:px-8">
+        <div className="border-t border-everett-ink/10 mb-12"></div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16">
 
             <div className="md:col-span-1">
-                <span className="font-sans text-sm font-bold tracking-widest text-concierge-navy/40 uppercase block mb-4">
+                <span className="font-sans text-sm font-bold tracking-widest text-everett-ink/40 uppercase block mb-4">
                     Our Expertise
                 </span>
-                <h2 className="font-serif text-4xl text-concierge-navy leading-tight">
+                <h2 className="font-serif text-4xl text-everett-ink leading-tight">
                     Clinical excellence,<br />
                     delivered with <span className="italic">grace</span>.
                 </h2>
@@ -55,15 +55,15 @@ export default function ServiceGrid() {
                     <Link
                         key={service.id}
                         to={createPageUrl(service.link)}
-                        className="group block border-b border-concierge-stone pb-8 hover:border-concierge-navy transition-colors duration-500"
+                        className="group block border-b border-everett-ink/10 pb-8 hover:border-everett-ink transition-colors duration-500"
                     >
                         <div className="flex justify-between items-baseline mb-4">
-                            <h3 className="font-serif text-2xl text-concierge-navy group-hover:translate-x-2 transition-transform duration-300">
+                            <h3 className="font-serif text-2xl text-everett-ink group-hover:translate-x-2 transition-transform duration-300">
                                 {service.title}
                             </h3>
-                            <ArrowUpRight className="w-5 h-5 text-concierge-navy/30 group-hover:text-concierge-navy transition-colors" />
+                            <ArrowUpRight className="w-5 h-5 text-everett-ink/30 group-hover:text-everett-ink transition-colors" />
                         </div>
-                        <p className="font-sans text-concierge-navy/60 leading-relaxed text-sm max-w-xs">
+                        <p className="font-sans text-everett-ink/60 leading-relaxed text-sm max-w-xs">
                             {service.description}
                         </p>
                     </Link>

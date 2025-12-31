@@ -15,7 +15,7 @@ export default function SplitHero() {
                     className="w-full h-full object-cover"
                 />
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-concierge-navy/90 via-concierge-navy/40 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-everett-ink/90 via-everett-ink/40 to-transparent"></div>
             </div>
 
             {/* Content Stack */}
@@ -36,12 +36,12 @@ export default function SplitHero() {
 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                     <Link to={createPageUrl('Contact')}>
-                        <button className="bg-concierge-stone text-concierge-navy hover:bg-white px-10 py-5 rounded-full font-sans font-medium text-sm tracking-widest uppercase transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        <button className="bg-everett-clay text-white hover:bg-white hover:text-everett-ink px-10 py-5 rounded-full font-sans font-medium text-sm tracking-widest uppercase transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
                             Start Your Journey
                         </button>
                     </Link>
                     <Link to={createPageUrl('Services')}>
-                        <button className="bg-transparent border border-white/30 text-white hover:bg-white hover:text-concierge-navy px-10 py-5 rounded-full font-sans font-medium text-sm tracking-widest uppercase transition-all backdrop-blur-sm">
+                        <button className="bg-transparent border border-white/30 text-white hover:bg-white hover:text-everett-ink px-10 py-5 rounded-full font-sans font-medium text-sm tracking-widest uppercase transition-all backdrop-blur-sm">
                             Our Services
                         </button>
                     </Link>
